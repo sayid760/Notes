@@ -5,7 +5,7 @@
 
 
 #### vue
-- [vue基础知识](https://github.com/sayid760/blog/issues/1)
+- [vue基础知识] (https://github.com/sayid760/blog/issues/1)
 - [vue进阶知识] 
 - [Vue进阶系列（一）之Render函数原理及实现]
 - [Vue进阶系列（一）之Render函数原理及实现]
