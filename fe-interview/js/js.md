@@ -3,16 +3,16 @@
 <b><details><summary>[2020.1.29] 用js封装一个前端分页的库，说说你的思路</summary></b>
 分页插件的功能：1)把请求的数据处理成每页10条数据 2)点击分页按钮时，可以操作回调函数，把
 
-前台需要传入参数：
+分页请求api
+前台传入参数：
 {
 　　业务所需的参数：data
 　　分页所需的参数：
 　　　　　1.当前页面在第几页（currentPage）
 　　　　　2.每页显示的条数（pageSize）
-    分页所显示的容器：'#pagination'
 }
 
-后台返回
+服务器返回数据：
 {
 　　用于展示表格用的数据：data，
 　　用于渲染分页用的数据：
@@ -97,4 +97,5 @@ Pagination.prototype.getPaginationHtml = function () {
 module.exports = Pagination;
 ```
 
+(参考)[https://www.cnblogs.com/pengfei25/p/10429274.html]
 </details>
