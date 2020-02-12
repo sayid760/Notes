@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+    function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+    function bind(fn, thisArg) {
+      return function wrap() {
+        var args = new Array(arguments.length);
+        for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i];
+        }
+        return fn.apply(thisArg, args);
+      };
+    };
+
+    function extend(a, b, thisArg) {
+      forEach(b, function assignValue(val, key) {
+        if (thisArg && typeof val === 'function') {
+          a[key] = bind(val, thisArg);
+        } else {
+          a[key] = val;
+        }
+      });
+      return a;
+    }
+
+
+    let num=0
+    function Axios(config){
+      this.defaults = config || {}
+    }
+    Axios.prototype.request=function(){
+      num +=1
+      console.log(num)
+    }
+    Axios.prototype.get=function(){
+      console.log('method get')
+    }
+
+   /* 1.为什么不直接new Axios 返回？ 
+      1）因为会继承同一个Axios原型对象，所有原型对象上的属性和方法都是共享
+      2）返回的是new Axios实例的话就只能用axios.xxx()来调用方法，而不是axios()函数执行方法
+   */
+    function createInstance(config){   
+      var context = new Axios(config);
+      // console.dir(context)
+      var instance = bind(Axios.prototype.request, context);  
+      extend(instance, Axios.prototype, context); // 把Axios原型对象的方法添加到instance上
+      extend(instance, context); // 把context的属性方法添加到instance上
+      console.dir(instance)
+
+      return instance 
+    }
+    
+    var axios = createInstance('1111');
+    axios.Axios = Axios;
+    console.dir(axios)   
+    // axios1.get()
+    // var axios2 = createInstance('1111');
+    // console.dir(axios1.request())
+    // console.dir(axios2.request())
+    // console.dir(axios2.request())
+
+    /* var axios1 = new Axios('1111');
+      var axios2 = new Axios('222');
+      axios1.get()
+      console.dir(axios1.request())
+      console.dir(axios2.request())
+      console.dir(axios2.request())
+      */
+  </script>
+</body>
+</html>
