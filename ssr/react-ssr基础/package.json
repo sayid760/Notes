@@ -1,0 +1,32 @@
+{
+  "name": "react-ssr",
+  "version": "1.0.0",
+  "description": "前后端同构\r ReactDomServer.renderToString()\r VueServerRender.renderToString()",
+  "scripts": {
+    "ab": "nab  http://localhost:3000 --increase 200",
+    "dev": "node ./list/browser/webpack.config.js",
+    "build:list": "webpack --inline --progress --config ./list/browser/webpack.config.js",
+    "server:list": "nodemon ./list/node/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-react": "^7.9.1",
+    "@babel/register": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "easy_sock": "^0.3.9",
+    "koa": "^2.11.0",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
+    "protocol-buffers": "^4.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}

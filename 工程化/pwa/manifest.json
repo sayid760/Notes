@@ -1,0 +1,19 @@
+{
+    "name": "哇哈哈哈",
+    "short_name": "哈",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f60",
+    "description": "A simply readable Hacker News app.",
+    "icons": [{
+      "src": "images/aa.jpg",
+      "sizes": "511x511",
+      "type": "image/jpg"
+    }],
+    "related_applications": [{
+      "platform": "web"
+    }, {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=cheeaun.hackerweb"
+    }]
+  }
