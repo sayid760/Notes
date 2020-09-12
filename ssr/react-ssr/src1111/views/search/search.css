@@ -1,0 +1,7 @@
+.search-text {
+  font-size: 14px;
+  display: flex;
+}
+.search-text .text {
+  color: #f00;
+}

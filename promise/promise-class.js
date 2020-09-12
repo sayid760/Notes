@@ -1,3 +1,5 @@
+const { reject } = require("async")
+
 (function(window){
     const PENDING = 'pending'
     const RESOLVED = 'resolved'
