@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     /*
+        变化表（保存所有的修改）：this.modifyPropsMap = {} 
+        激活沙箱
+            1）拍照：看window下有没有prop属性，如果有就保存到快照里 this.windowSnapshot[prop] = window[prop]
+            2）拿到变化表里的修改过的，赋值到window上   window[p] = this.modifyPropsMap[p]
+        丢弃沙箱：判断是否失活，失活还原（拿快照表的还原）
+           1）判断是否失活：拿当前window里的属性和之前快照里的做对比，如果不一样了，说明属性有变化了，
+                        有变化就保存到变化表里（当前属性变化了，变化的值为window上的值）this.modifyPropsMap[prop] = window[prop]
+           2）如果失活，变回一年前，即快照赋值到window上   window[prop] = this.windowSnapshot[prop]
+     */
+        class SnapshotSandbox{
+            constructor(){
+                this.proxy = window
+                this.modifyPropsMap = {} // 记录window属性的修改
+                this.active()
+            }
+            active(){ // 激活
+                this.windowSnapshot = {} // 快照表
+                for(const prop in window){
+                    if(window.hasOwnProperty(prop)){ // 看window上有没有prop属性，有就拍快照 
+                        this.windowSnapshot[prop] = window[prop]
+                    }
+                }
+                Object.keys(this.modifyPropsMap).forEach(p=>{
+                    window[p] = this.modifyPropsMap[p]
+                })
+            }
+            inactive(){ // 失活
+                for(const prop in window){
+                    if(window.hasOwnProperty(prop)){ 
+                        // 如果跟快照表的不一样，就保存到修改表里，然后window的属性还原回去（拿快照表的赋值）
+                        if(window[prop] !== this.windowSnapshot[prop]){
+                            this.modifyPropsMap[prop] = window[prop]
+                            window[prop] = this.windowSnapshot[prop]
+                        }
+                    }
+                }
+            }
+        }
+
+      let sandbox = new SnapshotSandbox();
+        
+        ((window)=>{
+            window.a=1
+            window.b=2
+            console.log(window.a, window.b)
+            sandbox.inactive()  // 失活
+            console.log(window.a, window.b)
+            sandbox.active()  // 激活
+            console.log(window.a, window.b)
+        })(sandbox.proxy) // sandbox.proxy就是window
+
+    </script>
+</body>
+</html>
