@@ -1,28 +1,3 @@
-// import Vue from "vue";
-// import App from "./App.vue";
-// import router from "./router";
-// import { registerMicroApps, start } from "qiankun";
-
-// Vue.config.productionTip = false;
-
-// const apps = [
-//   {
-//     name: "vueApp",
-//     entry: "//localhost:8081", // 默认加载这个html
-//     container: "#vue", // 容器名
-//     activeRule: "/vue" // 激活路径
-//   },
-//   {
-//     name: "reactApp",
-//     entry: "//localhost:3000",
-//     container: "#react",
-//     activeRule: "/react",
-//     
-//   }
-// ];
-
-
-
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
