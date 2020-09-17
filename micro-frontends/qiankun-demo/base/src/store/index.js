@@ -1,7 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+import appStore from "./appStore";
+import userStore from "./userStore";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 /*
 export default new Vuex.Store({
@@ -19,10 +21,10 @@ export default new Vuex.Store({
 const modules = {
   appStore,
   userStore
-}
+};
 
 export const mainModules = modules;
 
 export const store = new Vuex.Store({
   modules
-})
+});

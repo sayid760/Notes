@@ -10,17 +10,15 @@ export default {
       mainAppName: 'base'
     }
   },
-  getters: {
-
-  },
+  getters: {},
   mutations: {
     saveApp(state, payload) {
-      state.app = payload;
+      state.app = payload
     }
   },
   actions: {
     getApp(data) {
-      this.commit('saveApp', data);
+      this.commit('saveApp', data)
     }
   }
 }
