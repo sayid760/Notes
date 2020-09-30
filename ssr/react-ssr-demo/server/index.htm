@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Title 3</title>
+    <style>
+    body, html, p, ol, li, li { margin: 0; padding: 0;  }
+    body {
+        margin: 20px;
+    }
+    .item img{
+        width: 150px;
+        height: 150px;
+    }
+    .classify a, .sort a{
+        padding: 0 10px;
+        cursor: pointer;
+    }
+    .classify a.active{
+        color: #f60;
+    }
+    </style>
+</head>
+<body>
+<!-- 对它做程序渲染，所以加id，就可以通过id给它处理 -->
+<div id="reactapp">${ reactString }</div>
+
+<section>
+</section>
+</body>
+
+<script>
+    // 初始化数据
+    window.reactInitData = ${reactData ? JSON.stringify(reactData) : ''};
+    window.reactInitFiltType = ${filtType};
+    window.reactInitSortType = ${sortType}
+</script>
+
+<script src="./source/main.js"></script>
+
+</html>
