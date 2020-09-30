@@ -14,7 +14,7 @@ export function reroute() {
     //  需要获取要被挂载的应用
     //  哪些应用需要被卸载
     const { appsToLoad, appsToMount, appsToUnmount } = getAppChanges();
-    // start方法调用时是同步的，但是加载流程是异步饿
+    // start方法调用时是同步的，但是加载流程是异步
     if (started) {
         // app装载
         return performAppChanges();

@@ -1,1 +1,0 @@
-webpack-dev-server --model development --open

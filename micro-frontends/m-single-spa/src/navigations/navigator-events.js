@@ -1,5 +1,6 @@
 // hashchange   popstate
-
+// 用户可能还会绑定自己的路由事件 vue
+// 当我们应用切换后，还需要处理原来的方法，需要在应用切换后在执行
 import { reroute } from "./reroute";
 
 export const routingEventsListeningTo = ['hashchange', 'popstate'];
@@ -34,8 +35,7 @@ window.removeEventListener = function(eventName, fn) {
 
 // 如果是hash路由 hash变化时可以切换 
 // 浏览器路由，浏览器路由是h5api的 如果切换时不会触发popstate
-
-function patchedUpdateState(updateState,methodName){
+function patchedUpdateState(updateState, methodName){
     return function(){
         const urlBefore = window.location.href;
         updateState.apply(this,arguments); // 调用切换方法
@@ -48,11 +48,5 @@ function patchedUpdateState(updateState,methodName){
     }
 }
 
-
 window.history.pushState = patchedUpdateState(window.history.pushState,'pushState');
 window.history.replaceState = patchedUpdateState(window.history.replaceState,'replaceState');
-
-// 用户可能还会绑定自己的路由事件 vue
-
-
-// 当我们应用切换后，还需要处理原来的方法，需要在应用切换后在执行

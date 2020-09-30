@@ -1,1 +1,0 @@
-export { getEntry }from './getEntry'
