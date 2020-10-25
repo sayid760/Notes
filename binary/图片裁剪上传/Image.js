@@ -97,7 +97,7 @@ export default class Image extends React.Component{
         for(let i=0;i<bytes.length;i++){
             uInt8Array[i] = bytes.charCodeAt[i];
         }
-        let blob = new Blob([arrayBuffer],{type:'image/png'});
+        let blob = new Blob([uInt8Array],{type:'image/png'});
         let xhr = new XMLHttpRequest;
         // 用来创建表单数据的，用append以键值的形式将数据加入进去即可
         let formData = new FormData(); 
