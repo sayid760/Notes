@@ -1,0 +1,14 @@
+.modal {
+  padding: 20px;
+}
+.modal div {
+  margin: 10px;
+}
+.modal-heading {
+  height: 200px;
+  background: yellow;
+}
+.modal-body {
+  height: 200px;
+  background: #fff;
+}

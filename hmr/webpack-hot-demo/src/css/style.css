@@ -1,0 +1,13 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+/* body {
+    background:url(../img/img1.jpg);
+} */
+ul,li {
+    list-style-type:none;
+}
+div {
+    transition: all ease 1s;
+}

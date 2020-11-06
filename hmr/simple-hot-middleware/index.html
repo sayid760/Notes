@@ -1,0 +1,43 @@
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Server-sent events demo</title>
+</head>
+<body>
+    <button>close Connection</button>
+    <ul></ul>
+<script>
+  var button = document.querySelector('button');
+  var evtSource = new window.EventSource('/__webpack_hmr');
+  console.log(evtSource.withCredentials);
+  console.log(evtSource.readyState);
+  console.log(evtSource.url);
+  var eventList = document.querySelector('ul');
+
+  evtSource.onopen = function() {
+    console.log("Connection to server opened.");
+  };
+
+  /* 获取推送过来的信息，如果有built，就触发函数
+     这里相当于boundle.js，有built就请求hot-update.js或hot-update.json
+  */
+  evtSource.onmessage = function(e) {
+    var newElement = document.createElement("li");
+    if(JSON.parse(e.data).action){
+      newElement.textContent = "message: " + e.data;
+      eventList.appendChild(newElement);
+    }
+  };
+
+  evtSource.onerror = function(e) {
+    console.log(e);
+  };
+
+  button.onclick = function() {
+    console.log('Connection closed');
+    evtSource.close();
+  };
+</script>
+</body>
+</html>
+
