@@ -94,7 +94,7 @@ export default {
       cb(perfData);
     });
     Util.onload(() => {
-       let perfData = Util.getPerfData(performance.timing)
+      let perfData = Util.getPerfData(performance.timing)
       perfData.type = 'onload'
       // 获取到数据应该给sdk上层 去上传这个数据
       cb(perfData);

@@ -1,46 +1,3 @@
-function myPromise(executor) {
-    this.status = 'pending'
-    this.value = null
-    this.reason = null
-    this.onFulfilledArray = []
-    this.onRejectedArray = []
-  
-    const resolve = value => {
-      if (value instanceof Promise) {
-        return value.then(resolve, reject)
-      }
-      setTimeout(() => {
-        if (this.status === 'pending') {
-          this.value = value
-          this.status = 'fulfilled'
-  
-          this.onFulfilledArray.forEach(func => {
-            func(value)
-          })
-        }
-      })
-    }
-  
-    const reject = reason => {
-      setTimeout(() => {
-        if (this.status === 'pending') {
-          this.reason = reason
-          this.status = 'rejected'
-  
-          this.onRejectedArray.forEach(func => {
-            func(reason)
-          })
-        }
-      })
-    }
-
-    try {
-        executor(resolve, reject)
-    } catch(e) {
-        reject(e)
-    }
-}
-
 
 const resolvePromise = (promise2, result, resolve, reject) => {
     // 当 result 和 promise2 相等时，也就是说 onfulfilled 返回 promise2 时，进行 reject
@@ -101,67 +58,9 @@ const resolvePromise = (promise2, result, resolve, reject) => {
     else {
       return resolve(result)
     }
-  }
+}
   
-  myPromise.prototype.then = function(onfulfilled, onrejected) {
-    onfulfilled = typeof onfulfilled === 'function' ? onfulfilled : data => data
-    onrejected = typeof onrejected === 'function' ? onrejected : error => {throw error}
   
-    // promise2 将作为 then 方法的返回值
-    let promise2
-  
-    if (this.status === 'fulfilled') {
-      return promise2 = new myPromise((resolve, reject) => {
-        setTimeout(() => {
-          try {
-            // 这个新的 promise2 resolved 的值为 onfulfilled 的执行结果
-            let result = onfulfilled(this.value)
-            resolvePromise(promise2, result, resolve, reject)
-          }
-          catch(e) {
-            reject(e)
-          }
-        })
-      })
-    }
-    if (this.status === 'rejected') {
-      return promise2 = new myPromise((resolve, reject) => {
-        setTimeout(() => {
-          try {
-            // 这个新的 promise2 reject 的值为 onrejected 的执行结果
-           let result = onrejected(this.reason)
-           resolvePromise(promise2, result, resolve, reject)
-          }
-          catch(e) {
-            reject(e)
-          }
-        })
-      })
-    }
-    if (this.status === 'pending') {
-      return promise2 = new myPromise((resolve, reject) => {
-        this.onFulfilledArray.push(value => {
-          try {
-            let result = onfulfilled(value)
-            resolvePromise(promise2, result, resolve, reject)
-          }
-          catch(e) {
-            return reject(e)
-          }
-        })
-  
-        this.onRejectedArray.push(reason => {
-          try {
-            let result = onrejected(reason)
-            resolvePromise(promise2, result, resolve, reject)
-          }
-          catch(e) {
-            return reject(e)
-          }
-        })      
-      })
-    }
-  }
   
   myPromise.prototype.catch = function(catchFunc) {
     return this.then(null, catchFunc)
