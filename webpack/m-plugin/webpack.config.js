@@ -5,6 +5,8 @@ let HtmlWbpackPlugin = require('html-webpack-plugin')
 let FileListPlugin = require('./plugins/FileListPlugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineSourcePlugin = require('./plugins/InlineSourcePlugin')
+const SkeletonPlugin = require('./plugins/SkeletonPlugin')
+
 // const UploadPlugin = require('./src/plugins/UploadPlugin')
 
 module.exports={
@@ -42,5 +44,8 @@ module.exports={
         // })
         // new DonePlugin(),
         // new AsyncPlugin()
+        new SkeletonPlugin({
+            text: '骨架屏'
+        })
     ]
 }
